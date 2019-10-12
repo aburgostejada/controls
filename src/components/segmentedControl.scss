@@ -1,0 +1,42 @@
+/* Constants Begin */
+$highLightColor: #333D6B;
+$highLightDefaultColor: #FFF;
+$backgroundColor: #F3F5F9;
+$textColor: #6B75A2;
+$borderRadius: 2px;
+
+/* Constants End */
+
+.segmentedControl{
+  display: inline-block;
+  background-color: $backgroundColor;
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  color: $textColor;
+  font-size: 0.75rem;
+  border-radius: $borderRadius;
+
+  .optionsContainer{
+    border-radius: $borderRadius;
+    margin-top: 0.45rem;
+    background-color: $highLightDefaultColor;
+    color: $textColor;
+
+    .selected{
+      background-color: $highLightColor;
+      color: $highLightDefaultColor;
+    }
+
+    span{
+      user-select: none;
+      cursor: pointer;
+      display: inline-block;
+      padding: 0.5rem 0.75rem;
+      border-radius: $borderRadius;
+    }
+  }
+
+  label{
+
+  }
+}
