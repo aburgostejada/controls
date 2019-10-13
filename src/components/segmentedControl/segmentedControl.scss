@@ -3,23 +3,23 @@ $highLightColor: #333D6B;
 $highLightDefaultColor: #FFF;
 $backgroundColor: #F3F5F9;
 $textColor: #6B75A2;
-$borderRadius: 2px;
+$borderRadius: 3px;
 
 /* Constants End */
 
 .segmentedControl{
   display: inline-block;
   background-color: $backgroundColor;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.35rem;
   text-align: left;
   color: $textColor;
   font-size: 0.75rem;
   border-radius: $borderRadius;
 
   .optionsContainer{
+    overflow: hidden;
     border-radius: $borderRadius;
     margin-top: 0.45rem;
-    background-color: $highLightDefaultColor;
     color: $textColor;
 
     .selected{
@@ -28,15 +28,31 @@ $borderRadius: 2px;
     }
 
     span{
+      background-color: $highLightDefaultColor;
       user-select: none;
       cursor: pointer;
       display: inline-block;
       padding: 0.5rem 0.75rem;
       border-radius: $borderRadius;
+      transition: background-color 400ms;
+
+      &:hover:not(.selected){
+        background-color: $highLightColor;
+        opacity: 0.8;
+        color: $highLightDefaultColor;
+      }
     }
   }
+}
 
-  label{
+@media only screen and (max-width: 600px) {
+  .segmentedControl{
+    .optionsContainer{
+      width: 100%;
 
+      span{
+        width: 100%;
+      }
+    }
   }
 }

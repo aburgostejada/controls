@@ -1,38 +1,24 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import Option from './segmentedControlOption';
+
 import './segmentedControl.scss';
-
-const SegmentedControlOption = (props) => {
-    const { value, label, selected, onSelected } = props;
-    const isSelected = selected === value;
-    const classes = classNames('option',{
-        'selected': isSelected
-    });
-
-    return (
-        <span className={classes} onClick={() => onSelected(value)}>
-            {label}
-        </span>
-    );
-};
-
-SegmentedControlOption.propsTypes = {
-    onSelected: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
-};
 
 const SegmentedControl = (props) => {
     const [selected, setSelected] = useState(props.selected);
     const { label, options, onSelected } = props;
 
+    if(options.length < 2 || options.length > 10){
+        throw(new Error(
+            'Segmented Control was designed to have at least 2 and no more than 10 options.'
+        ));
+    }
 
     return (
         <div className='segmentedControl'>
             <label>{label}</label>
             <div className='optionsContainer'>
-                {options.map((option) => <SegmentedControlOption
+                {options.map((option) => <Option
                     key={option.value}
                     selected={selected}
                     onSelected={(value) => {

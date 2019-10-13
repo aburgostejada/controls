@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SegmentedControl from './components/segmentedControl';
+import SegmentedControl from './components/segmentedControl/segmentedControl';
 import './App.scss';
 
 const App = (props) => {
@@ -10,10 +10,20 @@ const App = (props) => {
         forth: 'female'
     });
 
-    const option = (value, label) => {return { value, label } };
+    const option = (value, label, description = '') => {
+        return { value, label, description }
+    };
+
     const getSelected = (field) => <span className="selection">
         {field ? `selected -> ${field}` : null}
     </span>;
+
+    const onSelectedFactory = (field) => {
+        return (value) => setValues({
+            ...values,
+            [field]: value
+        });
+    };
 
     return (
         <div className="App">
@@ -25,13 +35,10 @@ const App = (props) => {
                 <SegmentedControl
                     selected={values.first}
                     label={'Paid by'}
-                    onSelected={(value) => setValues({
-                        ...values,
-                        first: value
-                    })}
+                    onSelected={onSelectedFactory("first")}
                     options={[
-                        option('client', 'Client'),
-                        option('valassis_digital', 'Valassis Digital')
+                        option('client', 'Client', 'This is a explanation about the option'),
+                        option('valassis_digital', 'Valassis Digital', 'This is a explanation about the option')
                     ]}
                 />
             </article>
@@ -39,11 +46,8 @@ const App = (props) => {
                 <h2>With three options: {getSelected(values.second)}</h2>
                 <SegmentedControl
                     selected={values.second}
-                    label={'Gender'}
-                    onSelected={(value) => setValues({
-                        ...values,
-                        second: value
-                    })}
+                    label='Gender'
+                    onSelected={onSelectedFactory("second")}
                     options={[
                         option('all', 'All'),
                         option('female', 'Female'),
@@ -56,10 +60,7 @@ const App = (props) => {
                 <SegmentedControl
                     label='Paid by'
                     selected={values.third}
-                    onSelected={(value) => setValues({
-                        ...values,
-                        third: value
-                    })}
+                    onSelected={onSelectedFactory("third")}
                     options={[
                         option('client', 'Client'),
                         option('valassis_digital', 'Valassis Digital')
@@ -70,19 +71,15 @@ const App = (props) => {
                 <h2>With three options and one preselected: {getSelected(values.forth)}</h2>
                 <SegmentedControl
                     label='Gender'
-                    onSelected={(value) => setValues({
-                        ...values,
-                        forth: value
-                    })}
+                    onSelected={onSelectedFactory("forth")}
                     selected={values.forth}
                     options={[
                         option('all', 'All'),
                         option('female', 'Female'),
-                        option('male', 'Male'),
+                        option('male', 'Male')
                     ]}
                 />
             </article>
-
         </div>
     );
 };
