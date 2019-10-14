@@ -4,10 +4,9 @@ import React from 'react';
 
 const SegmentedControlOption = (props) => {
     const { value, label, selected, onSelected, description } = props;
-    const isSelected = selected === value;
     const title = description ? description : label;
     const classes = classNames('option',{
-        'selected': isSelected
+        'selected': selected
     });
 
     return (

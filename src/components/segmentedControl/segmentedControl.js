@@ -20,7 +20,7 @@ const SegmentedControl = (props) => {
             <div className='optionsContainer'>
                 {options.map((option) => <Option
                     key={option.value}
-                    selected={selected}
+                    selected={selected === option.value}
                     onSelected={(value) => {
                         setSelected(value);
                         onSelected(value);
